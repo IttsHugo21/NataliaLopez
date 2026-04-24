@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Cafetería Rincón | Zaragoza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #8d701c;
+            --secondary: #1a1a1a;
+            --accent: #f4f1ea;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-dark { background-color: var(--secondary); }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-serif font-bold text-primary italic">Rincón</span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                    <a href="#carta" class="nav-link">Carta</a>
+                    <a href="#reservas" class="nav-link">Reservar</a>
+                    <a href="#contacto" class="nav-link">Contacto</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 pt-2 pb-6 space-y-2">
+            <a href="#inicio" class="block py-2 text-lg">Inicio</a>
+            <a href="#carta" class="block py-2 text-lg">Carta</a>
+            <a href="#reservas" class="block py-2 text-lg">Reservar</a>
+            <a href="#contacto" class="block py-2 text-lg">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Restaurante Cafetería Rincón</h1>
+            <p class="text-xl md:text-2xl mb-8 font-light tracking-widest uppercase">Gastronomía y Confort en Zaragoza</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#carta" class="bg-primary hover:bg-yellow-700 text-white px-8 py-3 rounded-full transition duration-300 font-semibold">Ver Carta</a>
+                <a href="#reservas" class="bg-white text-black hover:bg-gray-200 px-8 py-3 rounded-full transition duration-300 font-semibold">Reservar Mesa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section class="py-20 bg-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-primary font-semibold tracking-widest uppercase">Bienvenido</span>
+                    <h2 class="text-4xl font-bold mt-2 mb-6">Tu Rincón favorito en el corazón de Zaragoza</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                        Con una valoración de 4,2 estrellas y más de 290 reseñas, en Rincón nos esforzamos por ofrecer una experiencia gastronómica equilibrada entre calidad y precio (10-20€ por persona).
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check-circle text-primary"></i>
+                            <span>Comer allí</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check-circle text-primary"></i>
+                            <span>Para llevar</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-times-circle text-red-500"></i>
+                            <span>A domicilio no disp.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interior del Restaurante" class="rounded-lg shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 shadow-xl hidden md:block">
+                        <p class="text-primary text-3xl font-bold">4.2</p>
+                        <p class="text-sm text-gray-500">Puntuación Google</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARTA / MENÚ -->
+    <section id="carta" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-4">Nuestra Carta</h2>
+            <p class="text-gray-500 mb-12">Una selección cuidada para todos los momentos del día</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Entrantes -->
+                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
+                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Para Empezar</h3>
+                    <ul class="space-y-4 text-left">
+                        <li class="flex justify-between">
+                            <span>Croquetas Caseras (6 uds)</span>
+                            <span class="font-bold">8.50€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Ensalada César Rincón</span>
+                            <span class="font-bold">10.20€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Tablas de Embutidos locales</span>
+                            <span class="font-bold">14.00€</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Principales -->
+                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
+                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Platos Principales</h3>
+                    <ul class="space-y-4 text-left">
+                        <li class="flex justify-between">
+                            <span>Solomillo al punto</span>
+                            <span class="font-bold">16.50€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Merluza a la Vasca</span>
+                            <span class="font-bold">15.00€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Arroz con Bogavante (min 2)</span>
+                            <span class="font-bold">18.00€/p</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Postres -->
+                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
+                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Postres y Cafés</h3>
+                    <ul class="space-y-4 text-left">
+                        <li class="flex justify-between">
+                            <span>Tarta de Queso Fluida</span>
+                            <span class="font-bold">5.50€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Café Especialidad</span>
+                            <span class="font-bold">2.20€</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Mousse de Chocolate</span>
+                            <span class="font-bold">4.80€</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVAS -->
+    <section id="reservas" class="py-20 bg-dark text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Reserva tu Mesa</h2>
+            <form id="reserva-form" class="grid md:grid-cols-2 gap-6 text-left">
+                <div>
+                    <label class="block mb-2 text-sm font-medium">Nombre Completo</label>
+                    <input type="text" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium">Correo Electrónico</label>
+                    <input type="email" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium">Fecha</label>
+                    <input type="date" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium">Nº Comensales</label>
+                    <select class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="6">6 Personas</option>
+                        <option value="8">Más de 8</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full bg-primary hover:bg-yellow-700 py-4 rounded font-bold text-lg transition duration-300">
+                        Confirmar Petición de Reserva
+                    </button>
+                </div>
+            </form>
+            <div id="reserva-exito" class="hidden mt-6 p-4 bg-green-500 text-white rounded">
+                ¡Gracias! Hemos recibido su solicitud. Nos pondremos en contacto pronto.
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO Y MAPA -->
+    <section id="contacto" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Dónde encontrarnos</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-location-dot text-primary text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold">Dirección</p>
+                                <p>C. de Violante de Hungría, 10, 50009 Zaragoza</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-phone text-primary text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold">Teléfono</p>
+                                <a href="tel:976567088" class="hover:text-primary">976 56 70 88</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fa-solid fa-clock text-primary text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold">Horario Habitual</p>
+                                <p>Lunes - Viernes: 08:00 - 23:00</p>
+                                <p>Sábados - Domingos: 09:00 - 00:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-80 bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center text-gray-500">
+                    <!-- Mapa de Google (Placeholder informativo ya que requiere API key real) -->
+                    <div class="text-center p-4">
+                        <i class="fa-solid fa-map-marked-alt text-4xl mb-2"></i>
+                        <p>Zaragoza, C. de Violante de Hungría, 10</p>
+                        <a href="https://www.google.com/maps/dir//C.+de+Violante+de+Hungría,+10,+50009+Zaragoza" target="_blank" class="text-primary underline mt-2 block">Abrir en Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-100 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-serif font-bold text-primary italic">Rincón</span>
+                    <p class="mt-4 text-gray-600 max-w-sm">
+                        Tu punto de encuentro en Zaragoza para desayunos, almuerzos y cenas inolvidables. Calidad y servicio desde hace años.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="#inicio" class="hover:text-primary">Inicio</a></li>
+                        <li><a href="#carta" class="hover:text-primary">Carta</a></li>
+                        <li><a href="#reservas" class="hover:text-primary">Reservas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="javascript:void(0)" onclick="openModal('legal-aviso')" class="hover:text-primary">Aviso Legal</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('legal-privacidad')" class="hover:text-primary">Política de Privacidad</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('legal-cookies')" class="hover:text-primary">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2024 Restaurante Cafetería Rincón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BANNER DE COOKIES (PRIMERA CAPA) -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-dark text-white p-6 z-[1001] border-t border-primary/30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm">
+                Utilizamos cookies propias y de terceros para mejorar su experiencia. Al continuar navegando entendemos que acepta nuestra 
+                <a href="javascript:void(0)" onclick="openModal('legal-cookies')" class="underline">política de cookies</a>.
+            </p>
+            <div class="flex space-x-4">
+                <button onclick="closeCookies()" class="bg-primary px-6 py-2 rounded text-sm font-bold">Aceptar</button>
+                <button onclick="closeCookies()" class="bg-gray-600 px-6 py-2 rounded text-sm font-bold">Configurar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES LEGALES -->
+    
+    <!-- Aviso Legal -->
+    <div id="legal-aviso" class="modal">
+        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
+            <button onclick="closeModal('legal-aviso')" class="absolute top-4 right-4 text-3xl">&times;</button>
+            <h2 class="text-3xl font-bold mb-6">Aviso Legal</h2>
+            <div class="prose text-gray-700 space-y-4">
+                <p><strong>1. Identificación:</strong> En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI), se informa que el sitio web pertenece a Restaurante Cafetería Rincón, con domicilio en C. de Violante de Hungría, 10, 50009 Zaragoza.</p>
+                <p><strong>2. Propiedad Intelectual:</strong> Todos los contenidos (textos, logos, imágenes) están protegidos por derechos de propiedad intelectual e industrial. Queda prohibida su reproducción sin permiso expreso.</p>
+                <p><strong>3. Responsabilidad:</strong> El titular no se hace responsable de los daños derivados del uso de este sitio web ni de los contenidos de enlaces externos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacidad -->
+    <div id="legal-privacidad" class="modal">
+        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
+            <button onclick="closeModal('legal-privacidad')" class="absolute top-4 right-4 text-3xl">&times;</button>
+            <h2 class="text-3xl font-bold mb-6">Política de Privacidad</h2>
+            <div class="prose text-gray-700 space-y-4">
+                <p><strong>Responsable:</strong> Restaurante Cafetería Rincón.</p>
+                <p><strong>Finalidad:</strong> Gestión de reservas, atención de consultas y, en su caso, envío de comunicaciones comerciales previa autorización.</p>
+                <p><strong>Legitimación:</strong> Consentimiento del interesado o ejecución de un contrato.</p>
+                <p><strong>Derechos:</strong> Acceso, rectificación, supresión y otros derechos indicados en la normativa de protección de datos (RGPD).</p>
+                <p>Los datos recogidos a través de los formularios de reserva serán tratados de forma confidencial y nunca cedidos a terceros sin base legal.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookies -->
+    <div id="legal-cookies" class="modal">
+        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
+            <button onclick="closeModal('legal-cookies')" class="absolute top-4 right-4 text-3xl">&times;</button>
+            <h2 class="text-3xl font-bold mb-6">Política de Cookies</h2>
+            <div class="prose text-gray-700 space-y-4">
+                <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Cookies Técnicas:</strong> Necesarias para el funcionamiento del sitio.</li>
+                    <li><strong>Cookies de Análisis:</strong> Para medir el tráfico y el uso del sitio de forma anónima (por ejemplo, Google Analytics).</li>
+                    <li><strong>Cookies de Redes Sociales:</strong> Permiten compartir contenido en plataformas externas.</li>
+                </ul>
+                <p>Puede configurar o rechazar las cookies a través de la configuración de su navegador.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica Menú Móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú móvil al hacer click en enlace
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
+
+        // Gestión de Modales
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Gestión Cookies
+        function closeCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        // Simulación de Reserva
+        document.getElementById('reserva-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('reserva-exito').classList.remove('hidden');
+        });
+
+        // Cerrar modales si se hace click fuera del contenido
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>

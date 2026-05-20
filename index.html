@@ -1,442 +1,2171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante Cafetería Rincón | Zaragoza</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
-        
-        :root {
-            --primary: #8d701c;
-            --secondary: #1a1a1a;
-            --accent: #f4f1ea;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Natalia López — Closer de Ventas High-Ticket. Psicología de ventas con rigor jurídico. Cierro con integridad, ética y resultados medibles." />
+  <meta name="keywords" content="closer de ventas, high ticket, ventas consultivas, cierre de ventas, ventas éticas" />
+  <meta property="og:title" content="Natalia López · Closer de Ventas" />
+  <meta property="og:description" content="Cierro ventas con integridad jurídica y psicología aplicada. Especialista en High-Ticket." />
+  <meta property="og:type" content="website" />
+  <title>Natalia López · Closer de Ventas High-Ticket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & VARS ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+    :root {
+      --navy: #0e1628;
+      --navy-mid: #162040;
+      --navy-light: #1e2d52;
+      --copper: #b5722a;
+      --copper-light: #d4924e;
+      --ivory: #f7f4ef;
+      --ivory-dark: #ede8e0;
+      --stone: #8a8278;
+      --white: #ffffff;
+      --text-body: #3a3530;
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body: 'Jost', sans-serif;
+      --ff-mono: 'Courier Prime', 'Courier New', monospace;
+    }
 
-        h1, h2, h3, .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
-        .bg-primary { background-color: var(--primary); }
-        .text-primary { color: var(--primary); }
-        .bg-dark { background-color: var(--secondary); }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
+    body {
+      background: var(--ivory);
+      color: var(--text-body);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
-        }
+    /* ===== UTILITIES ===== */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+    .text-copper { color: var(--copper); }
+    .text-navy { color: var(--navy); }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
+    /* ===== COOKIE BANNER ===== */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--navy);
+      color: var(--ivory);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      z-index: 5000;
+      border-top: 2px solid var(--copper);
+      flex-wrap: wrap;
+    }
+    #cookie-banner p { font-size: 0.82rem; line-height: 1.6; flex: 1; min-width: 260px; opacity: 0.85; }
+    #cookie-banner a { color: var(--copper-light); text-decoration: underline; cursor: pointer; }
+    .cookie-btns { display: flex; gap: 12px; flex-shrink: 0; }
+    .btn-cookie-accept {
+      background: var(--copper);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-cookie-accept:hover { background: var(--copper-light); }
+    .btn-cookie-reject {
+      background: transparent;
+      color: rgba(247,244,239,0.6);
+      border: 1px solid rgba(247,244,239,0.3);
+      padding: 10px 24px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-cookie-reject:hover { border-color: var(--ivory); color: var(--ivory); }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
+    /* ===== MODALS (páginas legales) ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(14,22,40,0.92);
+      z-index: 6000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--ivory);
+      max-width: 820px;
+      width: 100%;
+      padding: 60px 56px;
+      position: relative;
+      border-top: 4px solid var(--copper);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--stone);
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--navy); }
+    .modal-box h2 {
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .modal-box .modal-date {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      color: var(--stone);
+      margin-bottom: 36px;
+    }
+    .modal-box h3 {
+      font-family: var(--ff-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 28px 0 10px;
+    }
+    .modal-box p, .modal-box li {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: #4a4540;
+      margin-bottom: 12px;
+    }
+    .modal-box ul { padding-left: 20px; margin-bottom: 12px; }
+    .modal-box li { margin-bottom: 6px; }
+    .modal-box strong { color: var(--navy); font-weight: 500; }
+    .modal-box a { color: var(--copper); }
+    .modal-box .modal-section { margin-bottom: 8px; }
 
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(247,244,239,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(14,22,40,0.08);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(14,22,40,0.1); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 72px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .nav-logo-name {
+      font-family: var(--ff-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-title {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 400;
+      opacity: 0.65;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--copper); }
+    .nav-cta-btn {
+      background: var(--navy);
+      color: var(--ivory);
+      border: none;
+      padding: 11px 26px;
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav-cta-btn:hover { background: var(--copper); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--navy);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--ivory);
+      border-bottom: 1px solid var(--ivory-dark);
+      z-index: 199;
+      padding: 24px 40px 32px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .mobile-menu a {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 400;
+    }
 
-        .menu-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(181,114,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(181,114,42,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-bg-gradient {
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(181,114,42,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--copper);
+    }
+    .hero-eyebrow-text {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--copper-light);
+    }
+    .hero-h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.8rem, 5vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--ivory);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--copper-light);
+    }
+    .hero-lead {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(247,244,239,0.65);
+      max-width: 520px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--copper);
+      color: white;
+      padding: 15px 36px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.25s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: rgba(247,244,239,0.8);
+      border: 1px solid rgba(247,244,239,0.3);
+      padding: 14px 32px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--copper-light); color: var(--copper-light); }
+    .hero-right {
+      opacity: 0;
+      animation: fadeIn 1s ease 0.9s forwards;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(181,114,42,0.25);
+      padding: 40px 36px;
+    }
+    .hero-card-label {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(181,114,42,0.15);
+      margin-bottom: 28px;
+    }
+    .hero-stat {
+      background: var(--navy-light);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: var(--ff-display);
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: var(--copper-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .hero-stat-label {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.4);
+      line-height: 1.4;
+    }
+    .hero-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-badge-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(181,114,42,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .hero-badge-text {
+      font-size: 0.82rem;
+      color: rgba(247,244,239,0.65);
+      line-height: 1.4;
+    }
+    .hero-badge-text strong {
+      color: var(--ivory);
+      font-weight: 400;
+      display: block;
+      font-size: 0.78rem;
+      font-family: var(--ff-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== SECCIÓN LABEL ===== */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-tag::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--copper);
+      display: block;
+    }
+    .section-tag span {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== BIO ===== */
+    .bio-section {
+      padding: 120px 0;
+      background: var(--ivory);
+    }
+    .bio-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .bio-left { position: sticky; top: 100px; }
+    .bio-name {
+      font-family: var(--ff-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .bio-name em { display: block; font-style: italic; font-weight: 400; color: var(--copper); font-size: 2rem; }
+    .bio-title-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--ivory);
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      margin: 20px 0 28px;
+    }
+    .bio-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, var(--navy-light) 0%, var(--navy) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--copper);
+    }
+    .bio-portrait-initials {
+      font-family: var(--ff-display);
+      font-size: 7rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(181,114,42,0.2);
+      user-select: none;
+    }
+    .bio-portrait-label {
+      position: absolute;
+      bottom: 20px; left: 20px;
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.4);
+    }
+    .bio-right h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+    .bio-right h2 em { font-style: italic; font-weight: 400; color: var(--copper); }
+    .bio-right p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #5a5248;
+      margin-bottom: 24px;
+    }
+    .bio-pillars {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: rgba(14,22,40,0.06);
+    }
+    .bio-pillar {
+      background: var(--ivory);
+      padding: 24px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: background 0.3s;
+    }
+    .bio-pillar:hover { background: var(--ivory-dark); }
+    .bio-pillar-icon {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .bio-pillar-title {
+      font-family: var(--ff-body);
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .bio-pillar-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #6a6258;
+    }
+
+    /* ===== SERVICIOS ===== */
+    .services-section {
+      padding: 120px 0;
+      background: var(--navy);
+    }
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+    .services-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3.5vw, 3.4rem);
+      font-weight: 600;
+      color: var(--ivory);
+      line-height: 1.15;
+    }
+    .services-header h2 em { font-style: italic; font-weight: 400; color: var(--copper-light); }
+    .services-header p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: rgba(247,244,239,0.55);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(181,114,42,0.1);
+    }
+    .service-card {
+      background: var(--navy);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.35s;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--copper);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.03); }
+    .service-card:hover::after { transform: scaleY(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(181,114,42,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      transition: border-color 0.3s;
+    }
+    .service-card:hover .service-icon { border-color: var(--copper); }
+    .service-num {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 14px;
+    }
+    .service-title {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ivory);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: rgba(247,244,239,0.55);
+      margin-bottom: 24px;
+    }
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .service-list li {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      color: rgba(247,244,239,0.45);
+      padding-left: 16px;
+      position: relative;
+    }
+    .service-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--copper);
+      font-size: 0.9rem;
+    }
+
+    /* ===== PROCESO ===== */
+    .process-section {
+      padding: 120px 0;
+      background: var(--ivory-dark);
+    }
+    .process-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .process-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .process-header h2 em { font-style: italic; font-weight: 400; color: var(--copper); }
+    .process-header p {
+      font-size: 0.95rem;
+      color: var(--stone);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .process-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      left: 56px;
+      top: 32px; bottom: 32px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--copper), transparent);
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 40px;
+      align-items: flex-start;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(14,22,40,0.08);
+    }
+    .process-step:last-child { border-bottom: none; }
+    .process-num-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 4px;
+    }
+    .process-num {
+      width: 56px; height: 56px;
+      border: 1px solid var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--copper);
+      background: var(--ivory-dark);
+      position: relative;
+      z-index: 1;
+    }
+    .process-content h3 {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .process-content p {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: #5a5248;
+    }
+    .process-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 8px;
+    }
+
+    /* ===== RESULTADOS ===== */
+    .results-section {
+      padding: 120px 0;
+      background: var(--ivory);
+    }
+    .results-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .results-top h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .results-top h2 em { font-style: italic; font-weight: 400; color: var(--copper); }
+    .results-top p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #5a5248;
+      margin-bottom: 20px;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: rgba(14,22,40,0.1);
+    }
+    .result-box {
+      background: var(--ivory);
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .result-num {
+      font-family: var(--ff-display);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .result-num span { color: var(--copper); }
+    .result-label {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--stone);
+      line-height: 1.5;
+    }
+    .results-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--navy);
+    }
+    .result-feat {
+      background: var(--navy);
+      padding: 44px 36px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .result-feat:hover { border-color: var(--copper); }
+    .result-feat-icon { font-size: 1.6rem; margin-bottom: 20px; }
+    .result-feat-title {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ivory);
+      margin-bottom: 12px;
+    }
+    .result-feat-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(247,244,239,0.5);
+    }
+
+    /* ===== TESTIMONIOS ===== */
+    .testimonials-section {
+      padding: 120px 0;
+      background: var(--ivory-dark);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .testimonials-header h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .testimonials-header h2 em { font-style: italic; font-weight: 400; color: var(--copper); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(14,22,40,0.08);
+    }
+    .testi-card {
+      background: var(--ivory-dark);
+      padding: 48px 40px;
+      transition: background 0.3s;
+    }
+    .testi-card:hover { background: var(--ivory); }
+    .testi-stars {
+      color: var(--copper);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+    .testi-text {
+      font-family: var(--ff-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--navy);
+      margin-bottom: 28px;
+    }
+    .testi-separator {
+      width: 32px; height: 1px;
+      background: var(--copper);
+      margin-bottom: 20px;
+    }
+    .testi-name {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .testi-role {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--stone);
+    }
+
+    /* ===== FAQ ===== */
+    .faq-section {
+      padding: 120px 0;
+      background: var(--ivory);
+    }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-left h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .faq-left h2 em { font-style: italic; font-weight: 400; color: var(--copper); }
+    .faq-left p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--stone);
+      margin-bottom: 32px;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-item {
+      border-top: 1px solid rgba(14,22,40,0.1);
+    }
+    .faq-item:last-child { border-bottom: 1px solid rgba(14,22,40,0.1); }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      cursor: pointer;
+      gap: 16px;
+    }
+    .faq-q-text {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .faq-toggle {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(14,22,40,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--copper);
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      background: var(--copper);
+      border-color: var(--copper);
+      color: white;
+    }
+    .faq-a {
+      display: none;
+      padding-bottom: 20px;
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: #6a6258;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ===== CONTACTO ===== */
+    .contact-section {
+      padding: 120px 0;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(181,114,42,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-left h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 600;
+      color: var(--ivory);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .contact-left h2 em { font-style: italic; font-weight: 400; color: var(--copper-light); }
+    .contact-left p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: rgba(247,244,239,0.6);
+      margin-bottom: 40px;
+    }
+    .contact-info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-info-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .contact-info-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(181,114,42,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .contact-info-text {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: rgba(247,244,239,0.6);
+    }
+    .contact-info-text strong {
+      display: block;
+      color: var(--ivory);
+      font-weight: 400;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 2px;
+    }
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(181,114,42,0.15);
+      padding: 48px 44px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.5);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(247,244,239,0.12);
+      color: var(--ivory);
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.25s;
+      -webkit-appearance: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--copper);
+    }
+    .form-textarea { height: 120px; resize: vertical; }
+    .form-select option { background: var(--navy); color: var(--ivory); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-note {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: rgba(247,244,239,0.3);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+    .form-note a { color: rgba(181,114,42,0.7); cursor: pointer; }
+    .form-note a:hover { color: var(--copper-light); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .form-success-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .form-success h3 {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      color: var(--ivory);
+      margin-bottom: 10px;
+    }
+    .form-success p {
+      font-size: 0.85rem;
+      color: rgba(247,244,239,0.5);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #080f1d;
+      padding: 64px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(247,244,239,0.06);
+      margin-bottom: 32px;
+    }
+    .footer-brand-name {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ivory);
+      margin-bottom: 6px;
+    }
+    .footer-brand-title {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 20px;
+    }
+    .footer-brand-desc {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: rgba(247,244,239,0.35);
+    }
+    .footer-col-title {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.3);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a, .footer-links button {
+      font-size: 0.82rem;
+      color: rgba(247,244,239,0.5);
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--ff-body);
+      font-weight: 300;
+      padding: 0;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover, .footer-links button:hover { color: var(--copper-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(247,244,239,0.25);
+    }
+    .footer-legal-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal-links button {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.3);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .footer-legal-links button:hover { color: var(--copper); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 60px; padding: 80px 28px; }
+      .hero-right { max-width: 520px; }
+      .bio-inner { grid-template-columns: 1fr; }
+      .bio-left { position: static; }
+      .bio-portrait { aspect-ratio: 16/7; }
+      .services-header { grid-template-columns: 1fr; gap: 24px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .results-top { grid-template-columns: 1fr; gap: 48px; }
+      .results-bottom { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-btn { display: none; }
+      .nav-hamburger { display: flex; }
+      .container { padding: 0 24px; }
+      .hero-inner { padding: 60px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-timeline::before { left: 28px; }
+      .process-step { grid-template-columns: 56px 1fr; gap: 20px; }
+      .process-num { width: 40px; height: 40px; font-size: 1rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .faq-inner { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-legal-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+      .form-row { grid-template-columns: 1fr; }
+      .modal-box { padding: 40px 28px; }
+      #cookie-banner { padding: 16px 24px; }
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800">
+<body>
 
-    <!-- BARRA DE NAVEGACIÓN -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-serif font-bold text-primary italic">Rincón</span>
-                </div>
-                <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#inicio" class="nav-link">Inicio</a>
-                    <a href="#carta" class="nav-link">Carta</a>
-                    <a href="#reservas" class="nav-link">Reservar</a>
-                    <a href="#contacto" class="nav-link">Contacto</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Menú móvil -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 pt-2 pb-6 space-y-2">
-            <a href="#inicio" class="block py-2 text-lg">Inicio</a>
-            <a href="#carta" class="block py-2 text-lg">Carta</a>
-            <a href="#reservas" class="block py-2 text-lg">Reservar</a>
-            <a href="#contacto" class="block py-2 text-lg">Contacto</a>
-        </div>
-    </nav>
+<!-- ===== COOKIE BANNER ===== -->
+<div id="cookie-banner">
+  <p>
+    Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación.
+    Al continuar navegando, aceptas nuestra <a onclick="openModal('privacidad')">Política de Privacidad</a>
+    y nuestra <a onclick="openModal('cookies')">Política de Cookies</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="btn-cookie-reject" onclick="closeCookieBanner()">Rechazar</button>
+    <button class="btn-cookie-accept" onclick="closeCookieBanner()">Aceptar</button>
+  </div>
+</div>
 
-    <!-- HERO SECTION -->
-    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-center text-white px-4">
-        <div class="max-w-3xl">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4">Restaurante Cafetería Rincón</h1>
-            <p class="text-xl md:text-2xl mb-8 font-light tracking-widest uppercase">Gastronomía y Confort en Zaragoza</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#carta" class="bg-primary hover:bg-yellow-700 text-white px-8 py-3 rounded-full transition duration-300 font-semibold">Ver Carta</a>
-                <a href="#reservas" class="bg-white text-black hover:bg-gray-200 px-8 py-3 rounded-full transition duration-300 font-semibold">Reservar Mesa</a>
-            </div>
-        </div>
-    </section>
+<!-- ===== MODALES LEGALES ===== -->
 
-    <!-- SOBRE NOSOTROS -->
-    <section class="py-20 bg-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span class="text-primary font-semibold tracking-widest uppercase">Bienvenido</span>
-                    <h2 class="text-4xl font-bold mt-2 mb-6">Tu Rincón favorito en el corazón de Zaragoza</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed text-lg">
-                        Con una valoración de 4,2 estrellas y más de 290 reseñas, en Rincón nos esforzamos por ofrecer una experiencia gastronómica equilibrada entre calidad y precio (10-20€ por persona).
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-check-circle text-primary"></i>
-                            <span>Comer allí</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-check-circle text-primary"></i>
-                            <span>Para llevar</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-times-circle text-red-500"></i>
-                            <span>A domicilio no disp.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Interior del Restaurante" class="rounded-lg shadow-2xl">
-                    <div class="absolute -bottom-6 -left-6 bg-white p-6 shadow-xl hidden md:block">
-                        <p class="text-primary text-3xl font-bold">4.2</p>
-                        <p class="text-sm text-gray-500">Puntuación Google</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Aviso Legal -->
+<div id="modal-aviso" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Aviso Legal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('aviso')" aria-label="Cerrar">×</button>
+    <h2>Aviso Legal</h2>
+    <p class="modal-date">Última actualización: junio de 2025</p>
 
-    <!-- CARTA / MENÚ -->
-    <section id="carta" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold mb-4">Nuestra Carta</h2>
-            <p class="text-gray-500 mb-12">Una selección cuidada para todos los momentos del día</p>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Entrantes -->
-                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
-                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Para Empezar</h3>
-                    <ul class="space-y-4 text-left">
-                        <li class="flex justify-between">
-                            <span>Croquetas Caseras (6 uds)</span>
-                            <span class="font-bold">8.50€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Ensalada César Rincón</span>
-                            <span class="font-bold">10.20€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Tablas de Embutidos locales</span>
-                            <span class="font-bold">14.00€</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Principales -->
-                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
-                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Platos Principales</h3>
-                    <ul class="space-y-4 text-left">
-                        <li class="flex justify-between">
-                            <span>Solomillo al punto</span>
-                            <span class="font-bold">16.50€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Merluza a la Vasca</span>
-                            <span class="font-bold">15.00€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Arroz con Bogavante (min 2)</span>
-                            <span class="font-bold">18.00€/p</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Postres -->
-                <div class="bg-white p-8 border border-gray-100 shadow-sm rounded-xl menu-card">
-                    <h3 class="text-2xl font-serif border-b-2 border-primary inline-block mb-6">Postres y Cafés</h3>
-                    <ul class="space-y-4 text-left">
-                        <li class="flex justify-between">
-                            <span>Tarta de Queso Fluida</span>
-                            <span class="font-bold">5.50€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Café Especialidad</span>
-                            <span class="font-bold">2.20€</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Mousse de Chocolate</span>
-                            <span class="font-bold">4.80€</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h3>1. Datos identificativos</h3>
+    <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa que el presente sitio web es titularidad de:</p>
+    <ul>
+      <li><strong>Titular:</strong> Natalia López [Apellidos completos]</li>
+      <li><strong>NIF/NIE:</strong> [A cumplimentar]</li>
+      <li><strong>Domicilio:</strong> [Dirección completa], España</li>
+      <li><strong>Email:</strong> contacto@natalialopez.com</li>
+      <li><strong>Teléfono:</strong> [Número de contacto]</li>
+    </ul>
 
-    <!-- RESERVAS -->
-    <section id="reservas" class="py-20 bg-dark text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-8">Reserva tu Mesa</h2>
-            <form id="reserva-form" class="grid md:grid-cols-2 gap-6 text-left">
-                <div>
-                    <label class="block mb-2 text-sm font-medium">Nombre Completo</label>
-                    <input type="text" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
-                </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium">Correo Electrónico</label>
-                    <input type="email" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
-                </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium">Fecha</label>
-                    <input type="date" required class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
-                </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium">Nº Comensales</label>
-                    <select class="w-full p-3 rounded bg-white/10 border border-white/20 focus:outline-none focus:border-primary">
-                        <option value="1">1 Persona</option>
-                        <option value="2">2 Personas</option>
-                        <option value="4">4 Personas</option>
-                        <option value="6">6 Personas</option>
-                        <option value="8">Más de 8</option>
-                    </select>
-                </div>
-                <div class="md:col-span-2">
-                    <button type="submit" class="w-full bg-primary hover:bg-yellow-700 py-4 rounded font-bold text-lg transition duration-300">
-                        Confirmar Petición de Reserva
-                    </button>
-                </div>
-            </form>
-            <div id="reserva-exito" class="hidden mt-6 p-4 bg-green-500 text-white rounded">
-                ¡Gracias! Hemos recibido su solicitud. Nos pondremos en contacto pronto.
-            </div>
-        </div>
-    </section>
+    <h3>2. Objeto y ámbito de aplicación</h3>
+    <p>El presente Aviso Legal regula el acceso y uso del sitio web <strong>www.natalialopez.com</strong> (en adelante, "el Sitio Web"), así como los servicios ofrecidos a través del mismo. El acceso al Sitio Web implica la aceptación plena y sin reservas de todas las disposiciones incluidas en este Aviso Legal.</p>
 
-    <!-- CONTACTO Y MAPA -->
-    <section id="contacto" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 class="text-4xl font-bold mb-6">Dónde encontrarnos</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <i class="fa-solid fa-location-dot text-primary text-xl mt-1"></i>
-                            <div>
-                                <p class="font-bold">Dirección</p>
-                                <p>C. de Violante de Hungría, 10, 50009 Zaragoza</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <i class="fa-solid fa-phone text-primary text-xl mt-1"></i>
-                            <div>
-                                <p class="font-bold">Teléfono</p>
-                                <a href="tel:976567088" class="hover:text-primary">976 56 70 88</a>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <i class="fa-solid fa-clock text-primary text-xl mt-1"></i>
-                            <div>
-                                <p class="font-bold">Horario Habitual</p>
-                                <p>Lunes - Viernes: 08:00 - 23:00</p>
-                                <p>Sábados - Domingos: 09:00 - 00:00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="h-80 bg-gray-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center text-gray-500">
-                    <!-- Mapa de Google (Placeholder informativo ya que requiere API key real) -->
-                    <div class="text-center p-4">
-                        <i class="fa-solid fa-map-marked-alt text-4xl mb-2"></i>
-                        <p>Zaragoza, C. de Violante de Hungría, 10</p>
-                        <a href="https://www.google.com/maps/dir//C.+de+Violante+de+Hungría,+10,+50009+Zaragoza" target="_blank" class="text-primary underline mt-2 block">Abrir en Google Maps</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h3>3. Propiedad intelectual e industrial</h3>
+    <p>Todos los contenidos del Sitio Web —incluyendo, de forma enunciativa y no limitativa, textos, fotografías, gráficos, imágenes, iconos, logotipos, diseño gráfico y código fuente— son propiedad de Natalia López o de terceros que han autorizado su uso, y están protegidos por las leyes de Propiedad Intelectual e Industrial vigentes en España y en la Unión Europea.</p>
+    <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública, transformación o cualquier otro acto de explotación de dichos contenidos, total o parcial, sin la autorización expresa y por escrito de la titular.</p>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-100 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <span class="text-2xl font-serif font-bold text-primary italic">Rincón</span>
-                    <p class="mt-4 text-gray-600 max-w-sm">
-                        Tu punto de encuentro en Zaragoza para desayunos, almuerzos y cenas inolvidables. Calidad y servicio desde hace años.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Enlaces Rápidos</h4>
-                    <ul class="space-y-2 text-gray-600">
-                        <li><a href="#inicio" class="hover:text-primary">Inicio</a></li>
-                        <li><a href="#carta" class="hover:text-primary">Carta</a></li>
-                        <li><a href="#reservas" class="hover:text-primary">Reservas</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-gray-600">
-                        <li><a href="javascript:void(0)" onclick="openModal('legal-aviso')" class="hover:text-primary">Aviso Legal</a></li>
-                        <li><a href="javascript:void(0)" onclick="openModal('legal-privacidad')" class="hover:text-primary">Política de Privacidad</a></li>
-                        <li><a href="javascript:void(0)" onclick="openModal('legal-cookies')" class="hover:text-primary">Política de Cookies</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-500">
-                <p>&copy; 2024 Restaurante Cafetería Rincón. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <h3>4. Condiciones de uso</h3>
+    <p>El usuario se compromete a utilizar el Sitio Web de conformidad con la ley, la moral, el orden público y las presentes condiciones. Queda prohibido utilizar el Sitio Web con fines ilícitos o lesivos, o que puedan causar daños a terceros o a la imagen de Natalia López.</p>
 
-    <!-- BANNER DE COOKIES (PRIMERA CAPA) -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-dark text-white p-6 z-[1001] border-t border-primary/30">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-sm">
-                Utilizamos cookies propias y de terceros para mejorar su experiencia. Al continuar navegando entendemos que acepta nuestra 
-                <a href="javascript:void(0)" onclick="openModal('legal-cookies')" class="underline">política de cookies</a>.
-            </p>
-            <div class="flex space-x-4">
-                <button onclick="closeCookies()" class="bg-primary px-6 py-2 rounded text-sm font-bold">Aceptar</button>
-                <button onclick="closeCookies()" class="bg-gray-600 px-6 py-2 rounded text-sm font-bold">Configurar</button>
-            </div>
-        </div>
+    <h3>5. Exclusión de garantías y responsabilidad</h3>
+    <p>Natalia López no garantiza la disponibilidad y continuidad del funcionamiento del Sitio Web, ni se responsabiliza de los daños y perjuicios que pudieran derivarse de la falta de disponibilidad o de continuidad del funcionamiento del Sitio Web, ni de los errores en los contenidos.</p>
+    <p>La titular no será responsable por los contenidos de sitios web externos enlazados desde este Sitio Web.</p>
+
+    <h3>6. Legislación aplicable y jurisdicción</h3>
+    <p>La relación entre Natalia López y el usuario se regirá por la normativa española vigente. Para la resolución de conflictos, ambas partes se someten, con renuncia expresa a cualquier otro fuero, a los Juzgados y Tribunales del domicilio del usuario.</p>
+  </div>
+</div>
+
+<!-- Política de Privacidad -->
+<div id="modal-privacidad" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Política de Privacidad">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('privacidad')" aria-label="Cerrar">×</button>
+    <h2>Política de Privacidad</h2>
+    <p class="modal-date">Última actualización: junio de 2025</p>
+
+    <h3>1. Responsable del tratamiento</h3>
+    <p>En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y de la Ley Orgánica 3/2018 (LOPDGDD), se facilita la siguiente información:</p>
+    <ul>
+      <li><strong>Responsable:</strong> Natalia López</li>
+      <li><strong>NIF:</strong> [A cumplimentar]</li>
+      <li><strong>Domicilio:</strong> [Dirección], España</li>
+      <li><strong>Email de contacto:</strong> privacidad@natalialopez.com</li>
+    </ul>
+
+    <h3>2. Datos que recopilamos</h3>
+    <p>A través del formulario de contacto del Sitio Web, recopilamos los siguientes datos personales:</p>
+    <ul>
+      <li>Nombre y apellidos</li>
+      <li>Dirección de correo electrónico</li>
+      <li>Número de teléfono (opcional)</li>
+      <li>Empresa o proyecto (opcional)</li>
+      <li>Mensaje o consulta</li>
+    </ul>
+    <p>Adicionalmente, mediante cookies técnicas y analíticas se pueden recopilar datos de navegación (dirección IP anonimizada, páginas visitadas, tiempo de permanencia). Ver nuestra Política de Cookies para más información.</p>
+
+    <h3>3. Finalidades y base jurídica del tratamiento</h3>
+    <ul>
+      <li><strong>Atender consultas y solicitudes de información</strong> (base: consentimiento del interesado, art. 6.1.a RGPD).</li>
+      <li><strong>Gestión de la relación comercial</strong> con clientes y potenciales clientes (base: ejecución de un contrato, art. 6.1.b RGPD).</li>
+      <li><strong>Cumplimiento de obligaciones legales</strong> aplicables (base: obligación legal, art. 6.1.c RGPD).</li>
+      <li><strong>Envío de comunicaciones comerciales</strong>, solo si el usuario ha prestado consentimiento expreso (base: interés legítimo o consentimiento, art. 6.1.a/f RGPD).</li>
+    </ul>
+
+    <h3>4. Plazo de conservación</h3>
+    <p>Los datos se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recogidos y, en todo caso, durante los plazos legalmente establecidos. Los datos de consultas no convertidas en relación contractual se eliminarán en un plazo máximo de 2 años.</p>
+
+    <h3>5. Cesión de datos a terceros</h3>
+    <p>Natalia López no cederá datos personales a terceros, salvo en los siguientes supuestos:</p>
+    <ul>
+      <li>Cuando exista una obligación legal.</li>
+      <li>Proveedores de servicios tecnológicos (hosting, CRM, email) que actúan como encargados del tratamiento bajo contrato conforme al art. 28 RGPD.</li>
+    </ul>
+
+    <h3>6. Transferencias internacionales</h3>
+    <p>En caso de que algún proveedor de servicios esté ubicado fuera del Espacio Económico Europeo, Natalia López garantizará que dicha transferencia se realiza con las salvaguardas adecuadas (cláusulas contractuales tipo de la Comisión Europea u otros mecanismos conformes al RGPD).</p>
+
+    <h3>7. Derechos del interesado</h3>
+    <p>El usuario puede ejercer, en cualquier momento, los siguientes derechos enviando un escrito a <strong>privacidad@natalialopez.com</strong> con copia de su documento de identidad:</p>
+    <ul>
+      <li><strong>Acceso:</strong> conocer qué datos personales trata la responsable.</li>
+      <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+      <li><strong>Supresión ("derecho al olvido"):</strong> solicitar la eliminación de los datos.</li>
+      <li><strong>Limitación del tratamiento:</strong> solicitar la suspensión del tratamiento.</li>
+      <li><strong>Portabilidad:</strong> recibir los datos en formato estructurado y de uso común.</li>
+      <li><strong>Oposición:</strong> oponerse al tratamiento por motivos relacionados con su situación personal.</li>
+      <li><strong>Revocación del consentimiento</strong> en cualquier momento, sin que ello afecte a la licitud del tratamiento previo.</li>
+    </ul>
+    <p>Asimismo, tiene derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong> en <a href="https://www.aepd.es" target="_blank">www.aepd.es</a>.</p>
+
+    <h3>8. Seguridad</h3>
+    <p>Natalia López aplica las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado, de acuerdo con el estado de la tecnología y la naturaleza de los datos almacenados.</p>
+  </div>
+</div>
+
+<!-- Política de Cookies -->
+<div id="modal-cookies" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Política de Cookies">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('cookies')" aria-label="Cerrar">×</button>
+    <h2>Política de Cookies</h2>
+    <p class="modal-date">Última actualización: junio de 2025</p>
+
+    <h3>1. ¿Qué son las cookies?</h3>
+    <p>Las cookies son pequeños archivos de texto que se almacenan en el dispositivo del usuario cuando visita un sitio web. Permiten al sitio web recordar información sobre la visita, como el idioma preferido y otras configuraciones, con el fin de facilitar y mejorar las futuras visitas.</p>
+
+    <h3>2. Tipos de cookies utilizadas</h3>
+    <p><strong>Cookies técnicas / estrictamente necesarias:</strong> Imprescindibles para el funcionamiento básico del sitio web. No requieren consentimiento del usuario (art. 22.2 LSSI-CE).</p>
+    <p><strong>Cookies analíticas:</strong> Permiten cuantificar el número de usuarios y analizar estadísticamente el uso que estos hacen del servicio ofrecido. Los datos obtenidos son anónimos o pseudoanónimos.</p>
+    <p><strong>Cookies de preferencias:</strong> Permiten al sitio web recordar información que cambia la forma en que el sitio se comporta o tiene aspecto.</p>
+
+    <h3>3. Tabla de cookies</h3>
+    <p><strong>Cookies propias:</strong></p>
+    <ul>
+      <li><code>nl_cookie_consent</code> — Almacena la preferencia del usuario sobre cookies. Duración: 12 meses. Tipo: técnica.</li>
+      <li><code>nl_session</code> — Mantiene la sesión activa del usuario. Duración: sesión. Tipo: técnica.</li>
+    </ul>
+    <p><strong>Cookies de terceros (analíticas):</strong></p>
+    <ul>
+      <li><code>_ga</code>, <code>_gid</code> — Google Analytics. Estadísticas de uso anónimas. Duración: hasta 2 años.</li>
+    </ul>
+
+    <h3>4. Cómo gestionar o deshabilitar las cookies</h3>
+    <p>El usuario puede configurar su navegador para aceptar, bloquear o eliminar las cookies. A continuación, se facilitan los enlaces a las instrucciones de los principales navegadores:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank">Mozilla Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank">Safari</a></li>
+      <li><a href="https://support.microsoft.com/es-es/windows/eliminar-y-administrar-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">Microsoft Edge</a></li>
+    </ul>
+    <p>Tenga en cuenta que deshabilitar las cookies puede afectar al correcto funcionamiento del sitio web.</p>
+
+    <h3>5. Base legal</h3>
+    <p>El uso de cookies que requieren consentimiento se basa en el artículo 22.2 de la Ley 34/2002, LSSI-CE, y en el artículo 6.1.a del RGPD. El usuario otorga su consentimiento mediante la aceptación del banner de cookies al acceder al sitio web.</p>
+
+    <h3>6. Actualizaciones</h3>
+    <p>Natalia López puede actualizar esta Política de Cookies en cualquier momento para adaptarla a novedades legislativas, jurisprudenciales o de industria. Se recomienda revisar esta política periódicamente.</p>
+  </div>
+</div>
+
+<!-- Política de Contratación -->
+<div id="modal-contratacion" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Política de Contratación">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('contratacion')" aria-label="Cerrar">×</button>
+    <h2>Condiciones de Contratación</h2>
+    <p class="modal-date">Última actualización: junio de 2025</p>
+
+    <h3>1. Objeto</h3>
+    <p>Las presentes Condiciones regulan la contratación de los servicios profesionales de <strong>Natalia López</strong> en calidad de Closer de Ventas, en sus distintas modalidades (cierre de ventas, servicio integral setter+closer, y consultoría de procesos comerciales).</p>
+
+    <h3>2. Proceso de contratación</h3>
+    <p>La contratación de los servicios se formaliza mediante:</p>
+    <ul>
+      <li>Llamada de diagnóstico inicial (gratuita, sin compromiso).</li>
+      <li>Elaboración y envío de propuesta personalizada por escrito.</li>
+      <li>Aceptación expresa de la propuesta y firma del contrato de servicios.</li>
+      <li>Abono del importe pactado según las condiciones de pago acordadas.</li>
+    </ul>
+    <p>Ningún servicio comenzará a prestarse hasta la firma del contrato y la recepción del pago inicial correspondiente.</p>
+
+    <h3>3. Precios y condiciones de pago</h3>
+    <p>Los precios de los servicios son los acordados individualmente en cada propuesta, expresados en euros (€) e IVA incluido cuando corresponda. Las condiciones de pago (anticipado, mensual, por resultados o combinadas) serán las especificadas en el contrato.</p>
+
+    <h3>4. Duración y cancelación</h3>
+    <p>Los contratos de prestación continua tienen la duración mínima pactada. Cualquiera de las partes podrá resolver el contrato con un preaviso de <strong>30 días naturales</strong>, salvo pacto en contrario. La cancelación anticipada sin preaviso suficiente podrá conllevar la facturación del período de preaviso pendiente.</p>
+
+    <h3>5. Obligaciones de las partes</h3>
+    <p><strong>Natalia López se compromete a:</strong></p>
+    <ul>
+      <li>Prestar los servicios con diligencia, profesionalidad y ética.</li>
+      <li>Mantener absoluta confidencialidad sobre la información del cliente.</li>
+      <li>Informar periódicamente sobre la evolución y resultados del trabajo.</li>
+    </ul>
+    <p><strong>El cliente se compromete a:</strong></p>
+    <ul>
+      <li>Facilitar la información y accesos necesarios para la correcta prestación del servicio.</li>
+      <li>Abonar puntualmente los honorarios acordados.</li>
+      <li>Colaborar activamente en el proceso definido.</li>
+    </ul>
+
+    <h3>6. Confidencialidad</h3>
+    <p>Ambas partes se comprometen a mantener la más estricta confidencialidad sobre toda la información que se intercambie en el marco de la relación contractual, firmando en su caso un Acuerdo de Confidencialidad (NDA) específico.</p>
+
+    <h3>7. Limitación de responsabilidad</h3>
+    <p>Natalia López no garantiza resultados específicos, dado que los mismos dependen de múltiples factores externos. La responsabilidad máxima de Natalia López por incumplimiento contractual quedará limitada al importe de los honorarios abonados en los tres meses anteriores al evento generador del daño.</p>
+
+    <h3>8. Legislación y fuero</h3>
+    <p>Las presentes condiciones se rigen por la ley española. Para la resolución de controversias, las partes se someten a los Juzgados y Tribunales de [ciudad del domicilio de Natalia López], con renuncia a cualquier otro fuero.</p>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#inicio" style="text-decoration:none;">
+      <div class="nav-logo">
+        <div class="nav-logo-name">Natalia López</div>
+        <div class="nav-logo-title">Closer de Ventas · High-Ticket</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#contacto" class="nav-cta-btn">Contactar</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="#sobre-mi" onclick="closeMobile()">Sobre mí</a></li>
+    <li><a href="#servicios" onclick="closeMobile()">Servicios</a></li>
+    <li><a href="#proceso" onclick="closeMobile()">Proceso</a></li>
+    <li><a href="#resultados" onclick="closeMobile()">Resultados</a></li>
+    <li><a href="#faq" onclick="closeMobile()">FAQ</a></li>
+    <li><a href="#contacto" onclick="closeMobile()">Contactar</a></li>
+  </ul>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Closer de Ventas · High-Ticket · España</span>
+      </div>
+      <h1 class="hero-h1">
+        Donde el Derecho<br>
+        se convierte en<br>
+        <em>arte de cerrar.</em>
+      </h1>
+      <p class="hero-lead">
+        Psicología de ventas con rigor jurídico. Cierro con integridad, sin presión y con resultados que hablan por sí solos. Tu pipeline convertido en clientes de largo plazo.
+      </p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-primary">Agendar llamada gratuita</a>
+        <a href="#sobre-mi" class="btn-outline">Conocer mi perfil</a>
+      </div>
     </div>
-
-    <!-- MODALES LEGALES -->
-    
-    <!-- Aviso Legal -->
-    <div id="legal-aviso" class="modal">
-        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
-            <button onclick="closeModal('legal-aviso')" class="absolute top-4 right-4 text-3xl">&times;</button>
-            <h2 class="text-3xl font-bold mb-6">Aviso Legal</h2>
-            <div class="prose text-gray-700 space-y-4">
-                <p><strong>1. Identificación:</strong> En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI), se informa que el sitio web pertenece a Restaurante Cafetería Rincón, con domicilio en C. de Violante de Hungría, 10, 50009 Zaragoza.</p>
-                <p><strong>2. Propiedad Intelectual:</strong> Todos los contenidos (textos, logos, imágenes) están protegidos por derechos de propiedad intelectual e industrial. Queda prohibida su reproducción sin permiso expreso.</p>
-                <p><strong>3. Responsabilidad:</strong> El titular no se hace responsable de los daños derivados del uso de este sitio web ni de los contenidos de enlaces externos.</p>
-            </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-label">// Resultados verificados</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">+85%</div>
+            <div class="hero-stat-label">Tasa media<br>de cierre</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">180+</div>
+            <div class="hero-stat-label">Ventas<br>high-ticket</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">€2M+</div>
+            <div class="hero-stat-label">Volumen<br>gestionado</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">0</div>
+            <div class="hero-stat-label">Reclamaciones<br>legales</div>
+          </div>
         </div>
-    </div>
-
-    <!-- Privacidad -->
-    <div id="legal-privacidad" class="modal">
-        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
-            <button onclick="closeModal('legal-privacidad')" class="absolute top-4 right-4 text-3xl">&times;</button>
-            <h2 class="text-3xl font-bold mb-6">Política de Privacidad</h2>
-            <div class="prose text-gray-700 space-y-4">
-                <p><strong>Responsable:</strong> Restaurante Cafetería Rincón.</p>
-                <p><strong>Finalidad:</strong> Gestión de reservas, atención de consultas y, en su caso, envío de comunicaciones comerciales previa autorización.</p>
-                <p><strong>Legitimación:</strong> Consentimiento del interesado o ejecución de un contrato.</p>
-                <p><strong>Derechos:</strong> Acceso, rectificación, supresión y otros derechos indicados en la normativa de protección de datos (RGPD).</p>
-                <p>Los datos recogidos a través de los formularios de reserva serán tratados de forma confidencial y nunca cedidos a terceros sin base legal.</p>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <div class="hero-badge-icon">⚖️</div>
+            <div class="hero-badge-text">
+              <strong>Formación jurídica</strong>
+              Derecho · Compliance · Negociación
             </div>
-        </div>
-    </div>
-
-    <!-- Cookies -->
-    <div id="legal-cookies" class="modal">
-        <div class="bg-white max-w-4xl mx-auto my-10 p-8 rounded-lg relative">
-            <button onclick="closeModal('legal-cookies')" class="absolute top-4 right-4 text-3xl">&times;</button>
-            <h2 class="text-3xl font-bold mb-6">Política de Cookies</h2>
-            <div class="prose text-gray-700 space-y-4">
-                <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario:</p>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li><strong>Cookies Técnicas:</strong> Necesarias para el funcionamiento del sitio.</li>
-                    <li><strong>Cookies de Análisis:</strong> Para medir el tráfico y el uso del sitio de forma anónima (por ejemplo, Google Analytics).</li>
-                    <li><strong>Cookies de Redes Sociales:</strong> Permiten compartir contenido en plataformas externas.</li>
-                </ul>
-                <p>Puede configurar o rechazar las cookies a través de la configuración de su navegador.</p>
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-icon">🎯</div>
+            <div class="hero-badge-text">
+              <strong>Especialista high-ticket</strong>
+              Productos y servicios de alto valor
             </div>
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-icon">🛡️</div>
+            <div class="hero-badge-text">
+              <strong>Venta ética & compliance</strong>
+              Reputación de marca protegida
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        // Lógica Menú Móvil
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+<!-- ===== BIO ===== -->
+<section class="bio-section" id="sobre-mi">
+  <div class="container">
+    <div class="bio-inner">
+      <div class="bio-left reveal">
+        <div class="section-tag"><span>Quién soy</span></div>
+        <div class="bio-name">Natalia<br><em>López</em></div>
+        <div class="bio-title-badge">Closer · Abogada · Consultora</div>
+        <div class="bio-portrait">
+          <div class="bio-portrait-initials">NL</div>
+          <div class="bio-portrait-label">Fotografía profesional próximamente</div>
+        </div>
+      </div>
+      <div class="bio-right">
+        <div class="section-tag reveal"><span>Mi historia</span></div>
+        <h2 class="reveal">¿Qué sucede cuando unes la <em>psicología de ventas</em> con el rigor de un abogado?</h2>
+        <p class="reveal">Se obtiene un proceso de cierre blindado, ético y altamente efectivo. Vengo del mundo del Derecho y el Compliance, lo que me ha dado una estructura mental analítica y una habilidad natural para la negociación compleja.</p>
+        <p class="reveal">Hoy, aplico esa experiencia como Closer de Ventas, ayudando a empresas a <strong>convertir prospectos en clientes de largo plazo</strong> mediante una comunicación estratégica y honesta.</p>
+        <p class="reveal">No soy una vendedora al uso. Soy alguien que entiende el proceso de toma de decisión, identifica los miedos reales del prospecto y sabe exactamente cómo construir el marco de confianza necesario para que el "sí" sea auténtico, duradero y satisfactorio para ambas partes.</p>
+        <div class="bio-pillars reveal">
+          <div class="bio-pillar">
+            <div class="bio-pillar-icon">⚖️</div>
+            <div>
+              <div class="bio-pillar-title">Venta con integridad</div>
+              <div class="bio-pillar-desc">Mi formación en Compliance me permite vender con total transparencia, protegiendo siempre la reputación de la marca. Cero fricciones legales, cero reclamaciones.</div>
+            </div>
+          </div>
+          <div class="bio-pillar">
+            <div class="bio-pillar-icon">🧠</div>
+            <div>
+              <div class="bio-pillar-title">Gestión avanzada de objeciones</div>
+              <div class="bio-pillar-desc">Como abogada, sé que cada "no" es solo un punto de vista que requiere un argumento sólido y empático para ser transformado. Cada objeción es una oportunidad.</div>
+            </div>
+          </div>
+          <div class="bio-pillar">
+            <div class="bio-pillar-icon">🎯</div>
+            <div>
+              <div class="bio-pillar-title">Enfoque en High-Ticket</div>
+              <div class="bio-pillar-desc">Me especializo en productos o servicios de alto valor donde la confianza y el marco legal son piezas clave para la toma de decisión. Donde más importa, más rindo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Cerrar menú móvil al hacer click en enlace
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => menu.classList.add('hidden'));
-        });
+<!-- ===== SERVICIOS ===== -->
+<section class="services-section" id="servicios">
+  <div class="container">
+    <div class="services-header">
+      <div class="reveal">
+        <div class="section-tag" style="--copper:#d4924e;"><span style="color:var(--copper-light)">Servicios</span></div>
+        <h2>Lo que puedo hacer<br>por <em>tu negocio</em></h2>
+      </div>
+      <p class="reveal" style="color:rgba(247,244,239,0.55); font-size:0.95rem; line-height:1.85; align-self:end;">
+        Cada servicio está diseñado para adaptarse al momento en que se encuentra tu empresa. Desde la primera llamada hasta el contrato firmado, me encargo de que el proceso sea impecable.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🎯</div>
+        <div class="service-num">Servicio 01</div>
+        <div class="service-title">Closer de Ventas</div>
+        <p class="service-desc">Tomo las llamadas de mayor valor. Conecto, genero confianza y cierro con técnica consultiva. Sin presión, con resultados consistentes y clientes que repiten.</p>
+        <ul class="service-list">
+          <li>Llamadas de discovery y cierre</li>
+          <li>Gestión avanzada de objeciones</li>
+          <li>Cierre consultivo y ético</li>
+          <li>Seguimiento post-cierre</li>
+          <li>Reporte semanal de resultados</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">⚖️</div>
+        <div class="service-num">Servicio 02</div>
+        <div class="service-title">Cierre con Compliance</div>
+        <p class="service-desc">Especialidad diferencial: cierro garantizando que cada conversación, promesa y contrato estén blindados legalmente. Protejo tu marca en cada venta.</p>
+        <ul class="service-list">
+          <li>Revisión de scripts bajo normativa</li>
+          <li>Gestión de contratos y garantías</li>
+          <li>Protección ante reclamaciones</li>
+          <li>Comunicación conforme a RGPD</li>
+          <li>Documentación del proceso</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🔍</div>
+        <div class="service-num">Servicio 03</div>
+        <div class="service-title">Auditoría de Ventas</div>
+        <p class="service-desc">Analizo tu proceso comercial completo, identifico puntos de fuga y diseño un sistema de cierre que funciona sin que estés presente en cada llamada.</p>
+        <ul class="service-list">
+          <li>Análisis de embudo completo</li>
+          <li>Identificación de puntos de fuga</li>
+          <li>Diseño de scripts optimizados</li>
+          <li>Formación de tu equipo comercial</li>
+          <li>Entregable con plan de acción</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Gestión de Modales
-        function openModal(id) {
-            document.getElementById(id).style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+<!-- ===== PROCESO ===== -->
+<section class="process-section" id="proceso">
+  <div class="container">
+    <div class="process-header">
+      <div class="section-tag reveal" style="justify-content:center;"><span>Metodología</span></div>
+      <h2 class="reveal">Un proceso tan <em>sólido</em><br>como una defensa jurídica</h2>
+      <p class="reveal">Cada paso está diseñado con intención. Nada se deja al azar.</p>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step reveal">
+        <div class="process-num-wrap"><div class="process-num">01</div></div>
+        <div class="process-content">
+          <div class="process-tag">Diagnóstico · Semana 1</div>
+          <h3>Llamada de análisis gratuita</h3>
+          <p>Revisamos en profundidad tu oferta, tu cliente ideal, tu proceso actual y tus objetivos de crecimiento. Identifico de inmediato las oportunidades de mejora más relevantes y te digo, con honestidad, si podemos trabajar juntos y cómo.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num-wrap"><div class="process-num">02</div></div>
+        <div class="process-content">
+          <div class="process-tag">Estrategia · Semana 1-2</div>
+          <h3>Diseño del marco de cierre</h3>
+          <p>Creo el sistema personalizado: scripts adaptados a tu voz de marca, criterios de cualificación de leads, manejo de objeciones específicas de tu sector y estructura de seguimiento. Todo documentado y conforme a normativa.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num-wrap"><div class="process-num">03</div></div>
+        <div class="process-content">
+          <div class="process-tag">Ejecución · Semana 2 en adelante</div>
+          <h3>Arranque en 48 horas</h3>
+          <p>Una vez acordado el plan y firmado el contrato, empezamos en menos de 48 horas. Tus leads se convierten en llamadas. Las llamadas, en clientes. Sin fricciones, sin excusas.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num-wrap"><div class="process-num">04</div></div>
+        <div class="process-content">
+          <div class="process-tag">Optimización · Continua</div>
+          <h3>Mejora continua y reporte</h3>
+          <p>Revisión semanal de métricas (tasa de cierre, ticket medio, objeciones más frecuentes, tiempo de ciclo). Ajuste de estrategia en tiempo real. Transparencia total sobre cada conversación.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num-wrap"><div class="process-num">05</div></div>
+        <div class="process-content">
+          <div class="process-tag">Escala · Mes 2+</div>
+          <h3>Escalado sin fricciones</h3>
+          <p>Cuando los resultados son consistentes, diseñamos juntos la siguiente fase: más volumen, equipo, o automatización del proceso. El objetivo es que tu departamento comercial funcione solo, con o sin mí.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+<!-- ===== RESULTADOS ===== -->
+<section class="results-section" id="resultados">
+  <div class="container">
+    <div class="results-top">
+      <div class="reveal">
+        <div class="section-tag"><span>Resultados</span></div>
+        <h2>Los números<br>no necesitan<br><em>argumentos.</em></h2>
+        <p>Cada proyecto en el que he participado ha generado un impacto medible y verificable. No prometo lo que no puedo demostrar.</p>
+        <p>He trabajado con coaches, consultores, agencias de marketing, SaaS y profesionales de servicios de alto valor en España y Latinoamérica. En todos los casos, el resultado fue: más ingresos, menos fricción, clientes más satisfechos.</p>
+        <a href="#contacto" class="btn-primary" style="margin-top:12px; display:inline-block;">Quiero estos resultados</a>
+      </div>
+      <div class="results-grid reveal">
+        <div class="result-box">
+          <div class="result-num"><span>+</span>85<span>%</span></div>
+          <div class="result-label">Tasa media<br>de cierre</div>
+        </div>
+        <div class="result-box">
+          <div class="result-num">180<span>+</span></div>
+          <div class="result-label">Ventas<br>high-ticket</div>
+        </div>
+        <div class="result-box">
+          <div class="result-num">€2M<span>+</span></div>
+          <div class="result-label">Volumen total<br>gestionado</div>
+        </div>
+        <div class="result-box">
+          <div class="result-num">3<span>×</span></div>
+          <div class="result-label">ROI medio<br>para el cliente</div>
+        </div>
+      </div>
+    </div>
+    <div class="results-bottom">
+      <div class="result-feat reveal">
+        <div class="result-feat-icon">🛡️</div>
+        <div class="result-feat-title">Cero reclamaciones legales</div>
+        <p class="result-feat-desc">En todos los proyectos gestionados, ninguna venta ha derivado en reclamación legal o deterioro de la reputación de marca. El compliance no es opcional, es mi diferencial.</p>
+      </div>
+      <div class="result-feat reveal reveal-delay-1">
+        <div class="result-feat-icon">🔄</div>
+        <div class="result-feat-title">Alta tasa de retención</div>
+        <p class="result-feat-desc">Más del 70% de los clientes captados renuevan o contratan servicios adicionales. Vendo generando relaciones, no transacciones. La LTV de tus clientes aumenta.</p>
+      </div>
+      <div class="result-feat reveal reveal-delay-2">
+        <div class="result-feat-icon">⚡</div>
+        <div class="result-feat-title">Arranque en 48 horas</div>
+        <p class="result-feat-desc">Una vez acordado el plan, el proceso arranca en menos de dos días laborables. Sin onboardings interminables, sin burocracia innecesaria. Velocidad con estructura.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Gestión Cookies
-        function closeCookies() {
-            document.getElementById('cookie-banner').style.display = 'none';
-        }
+<!-- ===== TESTIMONIOS ===== -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-tag reveal" style="justify-content:center;"><span>Testimonios</span></div>
+      <h2 class="reveal">Lo que dicen quienes<br><em>ya confiaron</em> en mí</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Natalia transformó por completo nuestra forma de cerrar. Su enfoque es diferente al de cualquier closer que haya contratado antes. Transmite autoridad y, al mismo tiempo, una calidez que genera confianza instantánea. Triplicamos nuestros cierres en 6 semanas."</p>
+        <div class="testi-separator"></div>
+        <div class="testi-name">Alejandro M.</div>
+        <div class="testi-role">CEO · Agencia de Marketing Digital · Madrid</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Lo que más valoro es que nunca tuvimos una sola queja post-venta. Mis clientes siempre se sintieron bien atendidos y bien informados. Natalia vende con una integridad que refuerza la reputación de mi programa, no la pone en riesgo."</p>
+        <div class="testi-separator"></div>
+        <div class="testi-name">Sandra P.</div>
+        <div class="testi-role">Coaches de Alto Rendimiento · Valencia</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Tenía mucho miedo de externalizar mis ventas porque mi producto es complejo y técnico. Natalia se aprendió cada detalle, cada objeción, y los cerró mejor de lo que yo mismo lo hacía. Su formación jurídica marca una diferencia brutal."</p>
+        <div class="testi-separator"></div>
+        <div class="testi-name">Rubén C.</div>
+        <div class="testi-role">Fundador SaaS · Barcelona</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Simulación de Reserva
-        document.getElementById('reserva-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('reserva-exito').classList.remove('hidden');
-        });
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-left reveal">
+        <div class="section-tag"><span>Preguntas frecuentes</span></div>
+        <h2>Respuestas<br><em>directas</em></h2>
+        <p>Si tienes dudas sobre cómo trabajamos, aquí encontrarás respuestas honestas. Sin letra pequeña.</p>
+        <a href="#contacto" class="btn-primary" style="margin-top:8px;">¿Más dudas? Hablemos</a>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Qué tipo de negocios o sectores atiendes?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Me especializo en negocios con productos o servicios de alto valor (high-ticket): coaching, consultoría, agencias, formaciones premium, SaaS de ticket elevado y servicios profesionales B2B y B2C. Si tu ticket medio es superior a 1.000€, probablemente encajemos muy bien.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Cuál es tu modelo de honorarios?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Trabajo con distintos modelos según el proyecto: tarifa fija mensual, comisión sobre ventas cerradas, o un modelo híbrido (base + variable). Lo hablamos en la llamada de diagnóstico y te propongo la estructura más alineada con tus objetivos e intereses.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Cómo garantizas la calidad de los cierres?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Cada llamada sigue un protocolo documentado y adaptado a tu oferta. Grabo y reviso las sesiones para identificar mejoras continuas. Además, mi formación en compliance garantiza que ninguna promesa verbal o escrita cree riesgos legales para tu negocio.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Cuánto tiempo necesito para ver resultados?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">En la mayoría de proyectos, los primeros resultados son visibles en las 2-3 primeras semanas. El tiempo de onboarding y adaptación es muy corto porque vengo con un método probado. La tasa de cierre se estabiliza en niveles óptimos a partir del primer mes completo.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Firmas un contrato de confidencialidad (NDA)?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Sí, siempre. Antes de comenzar cualquier proyecto, firmamos un Acuerdo de Confidencialidad que protege toda la información sensible de tu negocio, tus clientes y tus procesos. La discreción es una parte fundamental de mi forma de trabajar.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Puedes trabajar con mi equipo comercial existente?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Absolutamente. Puedo integrarme como closer externo que colabora con tu equipo, o bien hacer una consultoría para optimizar el proceso de tu equipo actual. Muchos clientes me contratan inicialmente para cerrar y, después, para formar a su equipo interno.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">¿Trabajas en remoto o presencial?</span>
+            <div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">Trabajo principalmente en remoto, lo que me permite colaborar con empresas en toda España y Latinoamérica. Las llamadas de cierre se realizan por videoconferencia o teléfono. Para consultorías o formaciones presenciales, valoramos cada caso individualmente.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Cerrar modales si se hace click fuera del contenido
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-    </script>
+<!-- ===== CONTACTO ===== -->
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-left reveal">
+        <div class="section-tag" style="--copper:#d4924e;"><span style="color:var(--copper-light)">Contacto</span></div>
+        <h2>Hablemos de<br><em>tu proyecto</em></h2>
+        <p>La primera llamada es gratuita y sin compromiso. En 30 minutos analizamos tu situación y te digo, con total honestidad, si puedo ayudarte y cómo.</p>
+        <ul class="contact-info-list">
+          <li>
+            <div class="contact-info-icon">✉️</div>
+            <div class="contact-info-text">
+              <strong>Email</strong>
+              contacto@natalialopez.com
+            </div>
+          </li>
+          <li>
+            <div class="contact-info-icon">📱</div>
+            <div class="contact-info-text">
+              <strong>WhatsApp / Teléfono</strong>
+              +34 600 000 000
+            </div>
+          </li>
+          <li>
+            <div class="contact-info-icon">💼</div>
+            <div class="contact-info-text">
+              <strong>LinkedIn</strong>
+              linkedin.com/in/natalialopez-closer
+            </div>
+          </li>
+          <li>
+            <div class="contact-info-icon">🕒</div>
+            <div class="contact-info-text">
+              <strong>Horario de atención</strong>
+              Lunes a Viernes · 9:00 – 19:00 (CET)
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-form reveal">
+        <div id="form-container">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">Nombre *</label>
+              <input class="form-input" type="text" id="fname" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lname">Apellidos *</label>
+              <input class="form-input" type="text" id="lname" placeholder="Tus apellidos" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email *</label>
+            <input class="form-input" type="email" id="email" placeholder="tu@email.com" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="phone">Teléfono</label>
+              <input class="form-input" type="tel" id="phone" placeholder="+34 600 000 000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ticket">Ticket medio de tu oferta</label>
+              <select class="form-select" id="ticket">
+                <option value="">Selecciona...</option>
+                <option>500€ – 1.000€</option>
+                <option>1.000€ – 3.000€</option>
+                <option>3.000€ – 10.000€</option>
+                <option>+10.000€</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="service">Servicio de interés</label>
+            <select class="form-select" id="service">
+              <option value="">Selecciona...</option>
+              <option>Closer de Ventas</option>
+              <option>Cierre con Compliance</option>
+              <option>Auditoría de Ventas</option>
+              <option>Formación de equipo comercial</option>
+              <option>No lo tengo claro aún</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Cuéntame sobre tu proyecto *</label>
+            <textarea class="form-textarea" id="message" placeholder="Describe brevemente tu negocio, tu oferta y qué necesitas mejorar en ventas..." required></textarea>
+          </div>
+          <button class="btn-primary" onclick="submitForm()" style="width:100%; padding:16px;">Enviar consulta</button>
+          <p class="form-note">
+            Al enviar este formulario, aceptas nuestra
+            <a onclick="openModal('privacidad')">Política de Privacidad</a> y nuestras
+            <a onclick="openModal('contratacion')">Condiciones de Contratación</a>.
+            Tus datos nunca se cederán a terceros.
+          </p>
+        </div>
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">✅</div>
+          <h3>¡Mensaje recibido!</h3>
+          <p>Te responderé en un máximo de 24 horas laborables para agendar nuestra llamada de diagnóstico gratuita.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Natalia López</div>
+        <div class="footer-brand-title">Closer de Ventas · High-Ticket</div>
+        <p class="footer-brand-desc">Psicología de ventas con rigor jurídico. Cierro con integridad, ética y resultados medibles. Especialista en productos y servicios de alto valor.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegación</div>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#resultados">Resultados</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Servicios</div>
+        <ul class="footer-links">
+          <li><a href="#servicios">Closer de Ventas</a></li>
+          <li><a href="#servicios">Cierre con Compliance</a></li>
+          <li><a href="#servicios">Auditoría de Ventas</a></li>
+          <li><a href="#servicios">Formación comercial</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><button onclick="openModal('aviso')">Aviso Legal</button></li>
+          <li><button onclick="openModal('privacidad')">Política de Privacidad</button></li>
+          <li><button onclick="openModal('cookies')">Política de Cookies</button></li>
+          <li><button onclick="openModal('contratacion')">Condiciones de Contratación</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Natalia López · Todos los derechos reservados · España</div>
+      <div class="footer-legal-links">
+        <button onclick="openModal('aviso')">Aviso Legal</button>
+        <button onclick="openModal('privacidad')">Privacidad</button>
+        <button onclick="openModal('cookies')">Cookies</button>
+        <button onclick="openModal('contratacion')">Contratación</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== NAV SCROLL =====
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // ===== MOBILE MENU =====
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ===== SCROLL REVEAL =====
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ===== FAQ =====
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ===== MODALS =====
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  // ESC to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  // ===== COOKIE BANNER =====
+  function closeCookieBanner() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    localStorage.setItem('nl_cookie_consent', 'set');
+  }
+  if (localStorage.getItem('nl_cookie_consent')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+
+  // ===== FORM =====
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!fname || !email || !message) {
+      alert('Por favor, rellena los campos obligatorios (Nombre, Email y Mensaje).');
+      return;
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) {
+      alert('Por favor, introduce un email válido.');
+      return;
+    }
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // ===== SMOOTH SCROLL for nav links =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 72;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 </body>
 </html>
